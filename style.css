@@ -27,6 +27,7 @@ header{
   background-position: center;
   display: flex;
   flex-direction: row;
+  margin-left: 10px;
 }
 
 
@@ -76,8 +77,8 @@ width: 26%;
 nav{
   width: 18%;
     height: 1200px;
-    background-image: url(images/habib.jpg);
-    background-position: center;
+    background-image: linear-gradient(to right,#482d2d,#5900ffe9);
+    background-origin:padding-box;
     background-size: cover;
     background-origin:;
      overflow: ;
@@ -96,14 +97,7 @@ a[href]{
   
   
 }
-footer{
-  background-color: rgb(255, 0, 0);
-  /* background-color: linear-gradient(180deg, #FF00C7 -2.03%, rgba(233, 70, 70, 0) 97.97%); */
-    border: 2px solid #E5B9F4;
-    backdrop-filter: blur(40px);
-    width: 1415px;
-      height: 268px;
-}
+
 aside img{
   width: 426px;
     height: 372.98px;
@@ -119,7 +113,7 @@ nap, p, ol{
     }
   
    
- h2{
+nap h2{
   text-decoration: underline;
   font-style: italic;
   font-size: 28px;
@@ -129,3 +123,45 @@ nap, p, ol{
   border-radius: 8px;
   margin-bottom: 10px;
  }
+
+ footer {
+   background-image: linear-gradient(to bottom, #250c11e9, #fddca7e2);
+   /* background-color: linear-gradient(180deg, #FF00C7 -2.03%, rgba(233, 70, 70, 0) 97.97%); */
+   border: 2px solid #E5B9F4;
+   backdrop-filter: blur(40px);
+   width: 1415px;
+   height: 268px;
+   padding-left: 15px;
+   margin-left: 25px;
+ }
+footer div{
+  width: 600px;
+  height: 230px;
+  background-image: linear-gradient(to top,#23171b18,#160e1110);
+  padding: 10px;
+  margin-left: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.348);
+  border-style: groove;
+  border-radius: 10px;
+  display: inline-block;
+
+}
+
+ footer h2{
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  font-size: 30px;
+  font-style: italic;
+
+ }
+
+ footer, a p{
+  color: rgb(0, 0, 0);
+    padding: 5px;
+    font-size: 20px;
+    font-style: italic;
+    padding: 15px;
+  }
+  footer ,p+a{
+color: rgb(0, 0, 0);
+  }
