@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Products - মন্ডল হার্ডওয়ার - Browse our wide range of hardware products" />
+    <title>Products | মন্ডল হার্ডওয়ার</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  </head>
+  <body>
+    <nav class="main-nav">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img src="images/habiblogo.png" alt="Mondol Hardware Logo" class="nav-logo" />
+          <span class="brand-name">মন্ডল হার্ডওয়ার</span>
+        </div>
+        
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="products.html" class="active"><i class="fas fa-tools"></i> Products</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+          <li class="nav-search">
+            <input type="text" placeholder="Search products..." />
+            <button><i class="fas fa-search"></i></button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="products-page">
+        <div class="products-hero">
+          <h1>Our Products</h1>
+          <p class="subtitle">Quality hardware products for all your needs</p>
+        </div>
+
+        <div class="products-filters">
+          <div class="filter-group">
+            <label for="category">Category:</label>
+            <select id="category">
+              <option value="all">All Categories</option>
+              <option value="tools">Tools</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="paint">Paint & Supplies</option>
+              <option value="safety">Safety Equipment</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+              <option value="popular">Most Popular</option>
+              <option value="newest">Newest</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <!-- Products will be loaded here -->
+        </div>
+
+        <div class="pagination">
+          <button class="pagination-btn" id="prevPage" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <div class="page-numbers" id="pageNumbers">
+            <!-- Page numbers will be generated here -->
+          </div>
+          <button class="pagination-btn" id="nextPage">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Footer content from index.html -->
+    </footer>
+
+    <script>
+      // Product data
+      const products = [
+        {
+          id: 1,
+          name: "Hammer",
+          category: "Tools",
+          price: 1200,
+          image: "https://i.ibb.co/VqGvXzL/hammer.jpg",
+          description: "Professional grade hammer with ergonomic handle"
+        },
+        {
+          id: 2,
+          name: "Screwdriver Set",
+          category: "Tools",
+          price: 2500,
+          image: "https://i.ibb.co/0jZ8YzL/screwdriver-set.jpg",
+          description: "Complete set of precision screwdrivers"
+        },
+        {
+          id: 3,
+          name: "Safety Helmet",
+          category: "Safety",
+          price: 800,
+          image: "https://i.ibb.co/0jZ8YzL/safety-helmet.jpg",
+          description: "Industrial grade safety helmet with adjustable straps"
+        },
+        {
+          id: 4,
+          name: "Power Drill",
+          category: "Tools",
+          price: 8500,
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=60",
+          description: "Cordless power drill with multiple attachments"
+        },
+        {
+          id: 5,
+          name: "Measuring Tape",
+          category: "Tools",
+          price: 450,
+          image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&auto=format&fit=crop&q=60",
+          description: "25ft retractable measuring tape"
+        },
+        {
+          id: 6,
+          name: "Safety Gloves",
+          category: "Safety",
+          price: 350,
+          image: "https://i.ibb.co/0jZ8YzL/safety-gloves.jpg",
+          description: "Cut-resistant safety gloves"
+        },
+        {
+          id: 7,
+          name: "Wire Cutters",
+          category: "Electrical",
+          price: 1200,
+          image: "https://i.ibb.co/VqGvXzL/wire-cutters.jpg",
+          description: "Professional wire cutting tool"
+        },
+        {
+          id: 8,
+          name: "Paint Brush Set",
+          category: "Paint",
+          price: 1500,
+          image: "https://i.ibb.co/0jZ8YzL/paint-brushes.jpg",
+          description: "Set of 5 professional paint brushes"
+        },
+        {
+          id: 9,
+          name: "Pipe Wrench",
+          category: "Plumbing",
+          price: 1800,
+          image: "https://i.ibb.co/VqGvXzL/pipe-wrench.jpg",
+          description: "Adjustable pipe wrench for plumbing work"
+        },
+        {
+          id: 10,
+          name: "Safety Goggles",
+          category: "Safety",
+          price: 600,
+          image: "https://i.ibb.co/0jZ8YzL/safety-goggles.jpg",
+          description: "Anti-fog safety goggles"
+        },
+        {
+          id: 11,
+          name: "Angle Grinder",
+          category: "Tools",
+          price: 7500,
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=60",
+          description: "Professional angle grinder with safety features"
+        },
+        {
+          id: 12,
+          name: "Circuit Tester",
+          category: "Electrical",
+          price: 950,
+          image: "https://i.ibb.co/VqGvXzL/circuit-tester.jpg",
+          description: "Digital circuit tester for electrical work"
+        },
+        {
+          id: 13,
+          name: "Paint Roller Set",
+          category: "Paint",
+          price: 1200,
+          image: "https://i.ibb.co/0jZ8YzL/paint-roller.jpg",
+          description: "Complete paint roller set with tray"
+        },
+        {
+          id: 14,
+          name: "Pipe Cutter",
+          category: "Plumbing",
+          price: 1500,
+          image: "https://i.ibb.co/VqGvXzL/pipe-cutter.jpg",
+          description: "Professional pipe cutting tool"
+        },
+        {
+          id: 15,
+          name: "Safety Boots",
+          category: "Safety",
+          price: 3500,
+          image: "https://i.ibb.co/0jZ8YzL/safety-boots.jpg",
+          description: "Steel-toed safety boots"
+        },
+        {
+          id: 16,
+          name: "Cordless Screwdriver",
+          category: "Tools",
+          price: 4500,
+          image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&auto=format&fit=crop&q=60",
+          description: "Rechargeable cordless screwdriver"
+        },
+        {
+          id: 17,
+          name: "Voltage Meter",
+          category: "Electrical",
+          price: 2800,
+          image: "https://i.ibb.co/VqGvXzL/voltage-meter.jpg",
+          description: "Digital voltage meter for electrical testing"
+        },
+        {
+          id: 18,
+          name: "Paint Sprayer",
+          category: "Paint",
+          price: 12000,
+          image: "https://i.ibb.co/0jZ8YzL/paint-sprayer.jpg",
+          description: "Professional paint sprayer with multiple nozzles"
+        },
+        {
+          id: 19,
+          name: "Pipe Threader",
+          category: "Plumbing",
+          price: 8500,
+          image: "https://i.ibb.co/VqGvXzL/pipe-threader.jpg",
+          description: "Manual pipe threading tool"
+        },
+        {
+          id: 20,
+          name: "Safety Harness",
+          category: "Safety",
+          price: 4500,
+          image: "https://i.ibb.co/0jZ8YzL/safety-harness.jpg",
+          description: "Full body safety harness for construction"
+        },
+        {
+          id: 21,
+          name: "Circular Saw",
+          category: "Tools",
+          price: 9500,
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=60",
+          description: "Professional circular saw with laser guide"
+        },
+        {
+          id: 22,
+          name: "Wire Stripper",
+          category: "Electrical",
+          price: 850,
+          image: "https://i.ibb.co/VqGvXzL/wire-stripper.jpg",
+          description: "Automatic wire stripping tool"
+        },
+        {
+          id: 23,
+          name: "Paint Scraper",
+          category: "Paint",
+          price: 450,
+          image: "https://i.ibb.co/0jZ8YzL/paint-scraper.jpg",
+          description: "Professional paint scraping tool"
+        },
+        {
+          id: 24,
+          name: "Pipe Bender",
+          category: "Plumbing",
+          price: 3500,
+          image: "https://i.ibb.co/VqGvXzL/pipe-bender.jpg",
+          description: "Manual pipe bending tool"
+        },
+        {
+          id: 25,
+          name: "Safety Vest",
+          category: "Safety",
+          price: 1200,
+          image: "https://i.ibb.co/0jZ8YzL/safety-vest.jpg",
+          description: "High visibility safety vest"
+        },
+        {
+          id: 26,
+          name: "Jigsaw",
+          category: "Tools",
+          price: 6500,
+          image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&auto=format&fit=crop&q=60",
+          description: "Cordless jigsaw with variable speed"
+        },
+        {
+          id: 27,
+          name: "Cable Tester",
+          category: "Electrical",
+          price: 1800,
+          image: "https://i.ibb.co/VqGvXzL/cable-tester.jpg",
+          description: "Network cable testing tool"
+        },
+        {
+          id: 28,
+          name: "Paint Mixer",
+          category: "Paint",
+          price: 2500,
+          image: "https://i.ibb.co/0jZ8YzL/paint-mixer.jpg",
+          description: "Electric paint mixing tool"
+        },
+        {
+          id: 29,
+          name: "Pipe Wrench Set",
+          category: "Plumbing",
+          price: 4500,
+          image: "https://i.ibb.co/VqGvXzL/pipe-wrench-set.jpg",
+          description: "Set of 3 different size pipe wrenches"
+        },
+        {
+          id: 30,
+          name: "Safety Glasses",
+          category: "Safety",
+          price: 750,
+          image: "https://i.ibb.co/0jZ8YzL/safety-glasses.jpg",
+          description: "Impact resistant safety glasses"
+        },
+        {
+          id: 31,
+          name: "Router",
+          category: "Tools",
+          price: 8500,
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=60",
+          description: "Professional wood router with bits"
+        },
+        {
+          id: 32,
+          name: "Crimping Tool",
+          category: "Electrical",
+          price: 1500,
+          image: "https://i.ibb.co/VqGvXzL/crimping-tool.jpg",
+          description: "Wire crimping tool for electrical connections"
+        },
+        {
+          id: 33,
+          name: "Paint Tray",
+          category: "Paint",
+          price: 350,
+          image: "https://i.ibb.co/0jZ8YzL/paint-tray.jpg",
+          description: "Professional paint tray with liner"
+        },
+        {
+          id: 34,
+          name: "Pipe Fitting Kit",
+          category: "Plumbing",
+          price: 2800,
+          image: "https://i.ibb.co/VqGvXzL/pipe-fitting-kit.jpg",
+          description: "Complete pipe fitting tool kit"
+        },
+        {
+          id: 35,
+          name: "Safety Ladder",
+          category: "Safety",
+          price: 8500,
+          image: "https://i.ibb.co/0jZ8YzL/safety-ladder.jpg",
+          description: "Aluminum extension ladder with safety features"
+        },
+        {
+          id: 36,
+          name: "Sander",
+          category: "Tools",
+          price: 5500,
+          image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&auto=format&fit=crop&q=60",
+          description: "Orbital sander with dust collection"
+        },
+        {
+          id: 37,
+          name: "Multimeter",
+          category: "Electrical",
+          price: 3500,
+          image: "https://i.ibb.co/VqGvXzL/multimeter.jpg",
+          description: "Digital multimeter for electrical testing"
+        },
+        {
+          id: 38,
+          name: "Paint Gun",
+          category: "Paint",
+          price: 9500,
+          image: "https://i.ibb.co/0jZ8YzL/paint-gun.jpg",
+          description: "Professional paint spray gun"
+        },
+        {
+          id: 39,
+          name: "Pipe Clamp",
+          category: "Plumbing",
+          price: 1200,
+          image: "https://i.ibb.co/VqGvXzL/pipe-clamp.jpg",
+          description: "Adjustable pipe clamping tool"
+        },
+        {
+          id: 40,
+          name: "Safety Rope",
+          category: "Safety",
+          price: 2800,
+          image: "https://i.ibb.co/0jZ8YzL/safety-rope.jpg",
+          description: "High strength safety rope with carabiner"
+        }
+      ];
+
+      // Pagination settings
+      const itemsPerPage = 10;
+      let currentPage = 1;
+
+      // Function to display products
+      function displayProducts(page) {
+        const productsGrid = document.getElementById('productsGrid');
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedProducts = products.slice(start, end);
+
+        productsGrid.innerHTML = paginatedProducts.map(product => `
+          <div class="product-card">
+            <div class="product-image">
+              <img src="${product.image}" alt="${product.name}" loading="lazy" />
+            </div>
+            <div class="product-info">
+              <h3>${product.name}</h3>
+              <p class="product-category">${product.category}</p>
+              <p class="product-description">${product.description}</p>
+              <p class="product-price">৳${product.price.toLocaleString()}</p>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Function to update pagination
+      function updatePagination() {
+        const totalPages = Math.ceil(products.length / itemsPerPage);
+        const pageNumbers = document.getElementById('pageNumbers');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+
+        // Update previous button
+        prevBtn.disabled = currentPage === 1;
+
+        // Update next button
+        nextBtn.disabled = currentPage === totalPages;
+
+        // Generate page numbers
+        let pageNumbersHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          pageNumbersHTML += `
+            <button class="page-number ${i === currentPage ? 'active' : ''}" 
+                    onclick="goToPage(${i})">
+              ${i}
+            </button>
+          `;
+        }
+        pageNumbers.innerHTML = pageNumbersHTML;
+      }
+
+      // Function to go to specific page
+      function goToPage(page) {
+        currentPage = page;
+        displayProducts(currentPage);
+        updatePagination();
+      }
+
+      // Event listeners for pagination buttons
+      document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+          goToPage(currentPage - 1);
+        }
+      });
+
+      document.getElementById('nextPage').addEventListener('click', () => {
+        const totalPages = Math.ceil(products.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          goToPage(currentPage + 1);
+        }
+      });
+
+      // Initialize the page
+      displayProducts(currentPage);
+      updatePagination();
+
+      // Navigation Toggle
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    </script>
+  </body>
+</html> 
