@@ -67,7 +67,7 @@ body {
 }
 
 .gallery {
-  padding: 4rem 0;
+  padding: rem 0;
   background: var(--light-color);
 }
 
@@ -262,7 +262,7 @@ body {
 }
 
 .contact-info p {
-  display: flex;
+    display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 15px;
@@ -331,7 +331,7 @@ body {
   background: rgba(0, 0, 0, 0.2);
   padding: 25px 0;
   margin-top: 40px;
-  backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 .footer-bottom-content {
@@ -502,7 +502,7 @@ body {
   width: 120px;
   border-radius: 50%;
   border: 4px solid var(--accent-color);
-  padding: 5px;
+      padding: 5px;
   background: white;
   box-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
   transition: all 0.5s ease;
@@ -701,24 +701,49 @@ body {
 /* Enhanced Navigation Styles */
 .product-nav {
   background: var(--dark-bg);
-  padding: 15px;
+  padding: 25px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   position: sticky;
-  bottom: 20px;
-  margin-top: 20px;
+  bottom: 40px;
+  margin-top: 0px;
+  margin-bottom: 55px;
+  z-index: 1px;
   transition: all 0.3s ease;
-  height: fit-content;
 }
 
 .nav-title {
   color: white;
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  transition: all 0.3s ease;
+}
+
+.nav-title {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 2px solid var(--accent-color);
   position: relative;
+}
+
+.nav-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, #ff6b6b, #ffd93d);
+  transition: width 0.3s ease;
+}
+
+.product-nav:hover .nav-title::after {
+  width: 100px;
 }
 
 .product-list {
@@ -728,22 +753,21 @@ body {
 }
 
 .product-list li {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .product-list a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+    align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
   border-radius: var(--border-radius);
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
-  font-size: 0.95rem;
 }
 
 .product-list a:hover {
@@ -961,7 +985,7 @@ body {
 
 .about-hero h1 {
   font-size: 3rem;
-  margin-bottom: 15px;
+    margin-bottom: 15px;
   position: relative;
 }
 
@@ -1671,4 +1695,4 @@ body {
   .pagination {
     flex-wrap: wrap;
   }
-}
+  }
